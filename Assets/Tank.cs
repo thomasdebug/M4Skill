@@ -9,6 +9,7 @@ public class Tank : MonoBehaviour
     Vector3 direction;
     float speed = 1.0f;
     Vector2 minScreen, maxScreen;
+    [SerializeField] Bullet bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,17 @@ public class Tank : MonoBehaviour
         moveTank();
         BoxingScreen();
         SteeringTank();
+        Shoot();
+
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Bullet InstanceOfBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            InstanceOfBullet.Direction = direction;
+        }
     }
 
     private void SteeringTank()
